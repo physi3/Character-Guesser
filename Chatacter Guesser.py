@@ -38,7 +38,7 @@ class Question():
             if hasattr(self, 'trueQuestion'):
                 self.trueQuestion.ask()
             else:
-                ans = input("Is it "+self.trueCharacters[0].name+" (Y/N)\n>>> ")
+                ans = input("Is it "+self.trueCharacters[0].name+"\n"+self.trueCharacters[0].decription+" (Y/N)\n>>> ")
                 if ans.lower() == "y":
                     print("Great")
                 else:
@@ -51,7 +51,7 @@ class Question():
             if hasattr(self, 'falseQuestion'):
                 self.falseQuestion.ask()
             else:
-                ans = input("Is it "+self.falseCharacters[0].name+" (Y/N)\n>>> ")
+                ans = input("Is it "+self.falseCharacters[0].name+"\n"+self.falseCharacters[0].decription+" (Y/N)\n>>> ")
                 if ans.lower() == "y":
                     print("Great")
                 else:
