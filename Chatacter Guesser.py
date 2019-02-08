@@ -1,43 +1,5 @@
 import pickle
 
-#Online Line Text Code Start
-import mechanize
-import re
-
-url = "http://freetexthost.com/cquc2fsbdc"
-
-br=mechanize.Browser()
-response = br.open(url)
-try:
-    br.set_all_readonly(False)
-except:
-    pass
-
-def edit(text,pas,url): # text you want to add/replace, admin password , url 
-    response = br.open(url)
-    try:
-        br.set_all_readonly(False)
-    except:
-        pass
-    br.select_form("editform")
-    control = br.form.find_control("adminpass")
-    control.value=pas
-    response = br.submit()
-    br.select_form("editform")
-    control = br.form.find_control("text")
-    control.value=text
-    response = br.submit()
-
-def read(url):
-    response = br.open(url)
-    txt=response.read()
-    t1=re.findall(r'<div id="contentsinner">(.*?)<div style="clear: both;"><!-- --></div>',txt.decode('iso-8859-1'),re.DOTALL)
-    t1=t1[0]
-    t1=t1.strip()
-    return t1
-
-#Online Line Text Code End
-
 class Main():
     def __init__(self):
         self.answerHistory = []
@@ -99,26 +61,10 @@ class Question():
                     ans = input("If I asked you that question and you were thinking of "+character+" would you say yes (Y/N)\n>>>")
                     self.addQuestion(main.answerHistory[-1],question,Character(character,characterDesc) , ans.lower() == "y")
 
-def dump():
-    pickle_out = open("firstQuestion.pickle","wb")
-    pickle.dump(firstQuestion, pickle_out)
-    pickle_out.close()
-    pickle_out = open("firstQuestion.pickle","r")
-    firstQuestionToDump = pickle.read()
-    pickle_out.close()
-    edit(firstQuestionToDump,"puffin",url)
-
-def pickleUpdate():
-    pickle_in = open("firstQuestion.pickle","w")
-    pickle_in.write(read(url))
-    pickle_in.close()   
-
 class Character():
     def __init__(self, name, description):
         self.name = name
         self.decription = description
-
-pickleUpdate()
 
 pickle_in = open("firstQuestion.pickle","rb")
 firstQuestion = pickle.load(pickle_in)
@@ -126,7 +72,9 @@ pickle_in.close()
 
 def game():
     firstQuestion.ask()
-    
+    pickle_out = open("firstQuestion.pickle","wb")
+    pickle.dump(firstQuestion, pickle_out)
+    pickle_out.close()  
     print("\n\n\n")
     game()
 
