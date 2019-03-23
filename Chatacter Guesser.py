@@ -1,4 +1,5 @@
 import pickle
+import time
 
 class Main():
     def __init__(self):
@@ -66,13 +67,31 @@ class Character():
         self.name = name
         self.decription = description
 
-pickle_in = open("firstQuestion.pickle","rb")
-firstQuestion = pickle.load(pickle_in)
-pickle_in.close()
+directory = input("CharacterTree:\n[>> ")+".pickle"
+
+
+try:
+    pickle_in = open(directory,"rb")
+    firstQuestion = pickle.load(pickle_in)
+    pickle_in.close()
+except:
+    print("Creating New Tree")
+    time.sleep(0.7)
+    trueCharacter = input("Please input 2 character's pressing Enter after the end. \n>>> ")
+    falseCharacter = input(">>> ")
+    question = input("Now please give a question you would reply yes to if thinking of",trueCharacter,"and no to if thinking of",falseCharacter+".")
+    firstQuestion = Question(question,trueCharacter,falseCharacter,None)
+    f= open(directory,"w+")
+    f.close
+    pickle_out = open(directory,"wb")
+    pickle.dump(firstQuestion, pickle_out)
+    pickle_out.close()  
+    
+    
 
 def game():
     firstQuestion.ask()
-    pickle_out = open("firstQuestion.pickle","wb")
+    pickle_out = open(directory,"wb")
     pickle.dump(firstQuestion, pickle_out)
     pickle_out.close()  
     print("\n\n\n")
