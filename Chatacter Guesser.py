@@ -77,16 +77,19 @@ try:
 except:
     print("Creating New Tree")
     time.sleep(0.7)
-    trueCharacter = input("Please input 2 character's pressing Enter after the end. \n>>> ")
-    falseCharacter = input(">>> ")
-    question = input("Now please give a question you would reply yes to if thinking of",trueCharacter,"and no to if thinking of",falseCharacter+".")
-    firstQuestion = Question(question,trueCharacter,falseCharacter,None)
+    trueCharacterName = input("Please input the name of 2 character's pressing Enter at the end of each. \n>>> ")
+    falseCharacterName = input(">>> ")
+    trueCharacterDescription = input("And now a description for each. \n>>> ")
+    falseCharacterDescription = input(">>> ")
+    msg = "Now please give a question you would reply yes to if thinking of "+trueCharacterName+" and no to if thinking of "+falseCharacterName+". \n[>> "
+    question = input(msg)
+    firstQuestion = Question(question,Character(trueCharacterName,trueCharacterDescription),Character(falseCharacterName,falseCharacterDescription),None)
     f= open(directory,"w+")
     f.close
     pickle_out = open(directory,"wb")
     pickle.dump(firstQuestion, pickle_out)
     pickle_out.close()  
-    
+    print("\n\n\n")
     
 
 def game():
