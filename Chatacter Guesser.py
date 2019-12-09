@@ -67,7 +67,7 @@ class Character():
         self.name = name
         self.decription = description
 
-directory = input("CharacterTree:\n[>> ")+".pickle"
+directory = input("CharacterTree:\n[>> ")+'.cgt'
 
 
 try:
